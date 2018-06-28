@@ -1,0 +1,6 @@
+commerce_express_cost:
+  label: '运费'
+  singular_label: '运费'
+  plural_label: '运费'
+  has_ui: true
+  weight: 50

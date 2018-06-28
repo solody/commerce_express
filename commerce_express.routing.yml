@@ -1,0 +1,7 @@
+commerce_express.configuration:
+  path: '/admin/commerce/config/express'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: '快递'
+  requirements:
+    _permission: 'access commerce administration pages'

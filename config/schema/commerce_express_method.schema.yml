@@ -1,0 +1,15 @@
+commerce_express.commerce_express_method.*:
+  type: config_entity
+  label: 'Express method config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: '名称'
+    uuid:
+      type: string
+    cost:
+      type: float
+      label: '运费'

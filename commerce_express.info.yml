@@ -1,0 +1,13 @@
+name: 'Commerce Express'
+type: module
+description: 'My Awesome Module'
+core: 8.x
+package: Custom
+dependencies:
+  - basic_auth
+  - commerce_express
+  - commerce_order
+  - rest
+  - serialization
+  - simple_oauth
+  - user

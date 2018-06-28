@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Contains commerce_express.module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function commerce_express_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the commerce_express module.
+    case 'help.page.commerce_express':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function commerce_express_theme() {
+  return [
+    'commerce_express' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function commerce_express_entity_base_field_info(EntityTypeInterface $entity_type) {
+    $fields = [];
+    if ($entity_type->id() == 'commerce_order') {
+
+        $fields['express_method'] = BaseFieldDefinition::create('entity_reference')
+            ->setLabel(t('快递方式'))
+            ->setSetting('target_type', 'commerce_express_method')
+            ->setSetting('handler', 'default')
+            ->setDisplayOptions('view', [
+                'label' => 'above',
+                'type' => 'entity_reference_label'
+            ])
+            ->setDisplayOptions('form', [
+                'type' => 'options_select'
+            ])
+            ->setDisplayConfigurable('view', true)
+            ->setDisplayConfigurable('form', true);
+
+        $fields['express_number'] = BaseFieldDefinition::create('string')
+            ->setLabel(t('快递号'))
+            ->setDefaultValue('')
+            ->setDisplayOptions('view', [
+                'label' => 'inline',
+                'type' => 'string'
+            ])
+            ->setDisplayOptions('form', [
+                'type' => 'string_textfield'
+            ])
+            ->setDisplayConfigurable('view', true)
+            ->setDisplayConfigurable('form', true);
+    }
+    return $fields;
+}

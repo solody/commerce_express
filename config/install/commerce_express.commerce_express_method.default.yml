@@ -1,0 +1,6 @@
+langcode: zh-hans
+status: true
+dependencies: {  }
+id: default
+label: 普通快递
+cost: !!float 10

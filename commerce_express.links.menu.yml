@@ -1,0 +1,13 @@
+commerce_express.configuration:
+  title: '快递'
+  route_name: 'commerce_express.configuration'
+  parent: 'commerce.configuration'
+  weight: 0
+
+entity.commerce_express_method.collection:
+  title: '快递方式'
+  route_name: entity.commerce_express_method.collection
+  description: '管理快递方式和运费配置'
+  parent: commerce_express.configuration
+  weight: 99
+

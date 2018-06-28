@@ -1,0 +1,5 @@
+services:
+  commerce_express.express_cost_order_processor:
+    class: Drupal\commerce_express\ExpressCostOrderProcessor
+    tags:
+      - { name: commerce_order.order_processor, priority: 30, adjustment_type: commerce_express_cost }

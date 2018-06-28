@@ -1,0 +1,6 @@
+entity.commerce_express_method.add_form:
+  route_name: entity.commerce_express_method.add_form
+  title: 'Add Express method'
+  appears_on:
+    - entity.commerce_express_method.collection
+
