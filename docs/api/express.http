@@ -8,3 +8,12 @@ GET http://{{host}}/api/rest/commerce-express/express-method-list?_format=json
 Accept: application/json
 
 ###
+POST http://{{host}}/api/rest/commerce-express/set-order-express?_format=json
+Content-Type: application/json
+
+{
+  "order_id": 1,
+  "express_method": "default"
+}
+
+###
