@@ -40,35 +40,50 @@ function commerce_express_theme() {
  * Implements hook_entity_base_field_info().
  */
 function commerce_express_entity_base_field_info(EntityTypeInterface $entity_type) {
-    $fields = [];
-    if ($entity_type->id() == 'commerce_order') {
+  $fields = [];
+  if ($entity_type->id() == 'commerce_order') {
 
-        $fields['express_method'] = BaseFieldDefinition::create('entity_reference')
-            ->setLabel(t('快递方式'))
-            ->setSetting('target_type', 'commerce_express_method')
-            ->setSetting('handler', 'default')
-            ->setDisplayOptions('view', [
-                'label' => 'above',
-                'type' => 'entity_reference_label'
-            ])
-            ->setDisplayOptions('form', [
-                'type' => 'options_select'
-            ])
-            ->setDisplayConfigurable('view', true)
-            ->setDisplayConfigurable('form', true);
+    $fields['express_method'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('快递方式'))
+      ->setSetting('target_type', 'commerce_express_method')
+      ->setSetting('handler', 'default')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label'
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'options_select'
+      ])
+      ->setDisplayConfigurable('view', true)
+      ->setDisplayConfigurable('form', true);
 
-        $fields['express_number'] = BaseFieldDefinition::create('string')
-            ->setLabel(t('快递号'))
-            ->setDefaultValue('')
-            ->setDisplayOptions('view', [
-                'label' => 'inline',
-                'type' => 'string'
-            ])
-            ->setDisplayOptions('form', [
-                'type' => 'string_textfield'
-            ])
-            ->setDisplayConfigurable('view', true)
-            ->setDisplayConfigurable('form', true);
-    }
-    return $fields;
+    $fields['express_number'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('快递号'))
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'string'
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield'
+      ])
+      ->setDisplayConfigurable('view', true)
+      ->setDisplayConfigurable('form', true);
+  }
+
+  // 为产品添加包邮选项
+  if ($entity_type->id() == 'commerce_product') {
+
+    $fields['express_free'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('是否免邮费'))
+      ->setDefaultValue(false)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'boolean'
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox'
+      ]);
+  }
+  return $fields;
 }
