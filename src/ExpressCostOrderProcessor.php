@@ -39,23 +39,21 @@ class ExpressCostOrderProcessor implements OrderProcessorInterface {
   }
 
   private function determineExpressCost(OrderInterface $order) {
-    $express_free = true;
+    $express_free = false;
 
-    // 只要期中的一个商品不免邮，都需要添加邮费
+    // 只要期中的一个商品免邮，那么整单免邮
     foreach ($order->getItems() as $orderItem) {
-      if (!$express_free) break;
+      if ($express_free) break;
 
       $purchased_entity = $orderItem->getPurchasedEntity();
       if (method_exists($purchased_entity, 'getProduct')) {
         $product = $purchased_entity->getProduct();
         if ($product instanceof ProductInterface) {
           if ($product->hasField('express_free') && $product->get('express_free')->value) {
-            continue;
+            $express_free = true;
           }
         }
       }
-
-      $express_free = false;
     }
 
     $cost_amount = null;
