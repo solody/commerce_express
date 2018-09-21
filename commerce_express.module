@@ -87,3 +87,16 @@ function commerce_express_entity_base_field_info(EntityTypeInterface $entity_typ
   }
   return $fields;
 }
+
+function commerce_express_entity_operation(Drupal\Core\Entity\EntityInterface $entity) {
+  $operations = [];
+  if ($entity->getEntityTypeId() === 'commerce_order') {
+    $operations['express'] = [
+      'title' => t('快递发货'),
+      'url' => \Drupal\Core\Url::fromRoute('commerce_express.commerce_express_order_express_form', ['commerce_order' => $entity->id()]),
+      'weight' => 20,
+    ];
+  }
+  return $operations;
+
+}

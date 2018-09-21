@@ -5,3 +5,12 @@ commerce_express.configuration:
     _title: '快递'
   requirements:
     _permission: 'access commerce administration pages'
+
+commerce_express.commerce_express_order_express_form:
+  path: '/admin/commerce/orders/{commerce_order}/express'
+  defaults:
+    _form: '\Drupal\commerce_express\Form\OrderExpressForm'
+    _title: '快递发货'
+  requirements:
+    _access: 'TRUE'
+  
