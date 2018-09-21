@@ -12,5 +12,5 @@ commerce_express.commerce_express_order_express_form:
     _form: '\Drupal\commerce_express\Form\OrderExpressForm'
     _title: '快递发货'
   requirements:
-    _access: 'TRUE'
+    _permission: 'modify commerce express info and make fulfillment'
   
