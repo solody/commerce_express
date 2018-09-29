@@ -88,9 +88,20 @@ function commerce_express_entity_base_field_info(EntityTypeInterface $entity_typ
   return $fields;
 }
 
+/**
+ * Implements hook_entity_operation
+ *
+ * TODO::用配置来决定哪些类型的订单需要显示此菜单
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ * @return array
+ */
 function commerce_express_entity_operation(Drupal\Core\Entity\EntityInterface $entity) {
   $operations = [];
-  if ($entity->getEntityTypeId() === 'commerce_order' && \Drupal::currentUser()->hasPermission('modify commerce express info and make fulfillment')) {
+  if ($entity->getEntityTypeId() === 'commerce_order' &&
+    \Drupal::currentUser()->hasPermission('modify commerce express info and make fulfillment') &&
+    $entity->bundle() !== 'service_purchasable' &&
+    $entity->bundle() !== 'booking_online') {
     $operations['express'] = [
       'title' => t('快递发货'),
       'url' => \Drupal\Core\Url::fromRoute('commerce_express.commerce_express_order_express_form', ['commerce_order' => $entity->id()]),
